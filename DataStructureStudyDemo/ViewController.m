@@ -47,4 +47,43 @@
     
 }
 
+- (IBAction)CompareProcedureEfficiency:(UIButton *)sender {
+    
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+    
+    [self method1:10000];
+    
+    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+    NSLog(@"for循环程序1 in %f ms", linkTime *1000.0);//打印出来为代码执行时间 单位ms
+}
+
+- (IBAction)CompareProcedureEfficiency2:(UIButton *)sender {
+    CFAbsoluteTime startTime = CFAbsoluteTimeGetCurrent();
+
+    [self method2:10000];
+    
+    CFAbsoluteTime linkTime = (CFAbsoluteTimeGetCurrent() - startTime);
+    NSLog(@"递归程序2 in %f ms", linkTime *1000.0);//打印出来为代码执行时间 单位ms
+
+}
+
+
+//依次输出1-n之间的正整数 for循环
+- (void)method1:(NSInteger)n
+{
+    for (NSInteger i = 1; i<= n; i++) {
+        NSLog(@"%ld",i);
+    }
+}
+//依次输出1-n之间的正整数  递归
+- (void)method2:(NSInteger)n
+{
+    if (n) {
+        [self method2:n-1];
+        NSLog(@"%ld",n);
+    }
+    return;
+}
+
+
 @end
